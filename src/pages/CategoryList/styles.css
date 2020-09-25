@@ -1,0 +1,48 @@
+.page-subtitle {
+  position: absolute;
+  width: 102px;
+  height: 27px;
+  left: 24px;
+  top: 80px;
+  margin-bottom: 40px;
+}
+.page-subtitle p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.list-category {
+  position: relative;
+  top: 2rem;
+}
+
+@media (min-width: 700px) {
+  .list-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-subtitle {
+    position: absolute;
+    width: 102px;
+    height: 27px;
+    left: 24px;
+    top: 80px;
+    margin-bottom: 40px;
+  }
+  .page-subtitle p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+}

@@ -1,0 +1,58 @@
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.6rem 0;
+
+  background: linear-gradient(
+    360deg,
+    rgba(0, 0, 0, 0.07) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background-blend-mode: multiply;
+  box-sizing: border-box;
+  border-radius: 1rem;
+}
+
+.buttons-container a {
+  width: 29rem;
+  height: 4.6rem;
+  border-radius: 1rem;
+  font: 700 1.6rem Roboto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  color: var(--color-button-text);
+  transition: background-color 0.2s;
+
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+  border: 1px solid #b8bed5;
+  box-sizing: border-box;
+}
+
+.buttons-container a:hover {
+  opacity: 50%;
+}
+
+@media (min-width: 1100px) {
+  #page-landing-content {
+    max-width: 1100px;
+    display: grid;
+    grid-template-rows: 350px 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-areas:
+      "logo hero hero"
+      "buttons buttons total";
+  }
+
+  .buttons-container {
+    grid-area: buttons;
+    justify-content: flex-start;
+    margin: 1.6rem 0;
+  }
+  .buttons-container a {
+    font-size: 2.4rem;
+  }
+}
