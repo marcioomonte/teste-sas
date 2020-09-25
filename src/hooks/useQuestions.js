@@ -9,7 +9,7 @@ function useQuestions({ category }) {
   const getQuestions = useCallback((category) => {
     setLoading(true);
     api
-      .get(`?amount=10&type=multiple&category=${category}`) // a url ja esta na base
+      .get(`api.php?amount=10&type=multiple&category=${category}`) // a url ja esta na base
       .then((response) => response.data.results)
       .then(setQuestions)
       .catch(() => setError(true))

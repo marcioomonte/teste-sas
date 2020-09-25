@@ -2,16 +2,18 @@ import React from "react";
 import "./styles.css";
 import PageHeader from "../../components/PageHeader";
 import CategoryButton from "../../components/CategoryButton";
-import { categories } from "../../utils/categories";
 import useDeviceWidth from "../../hooks/useDeviceWidth";
+import useCategories from "../../hooks/useCategories";
 
 function CategoryList() {
   const [deviceWidth] = useDeviceWidth();
-
+  const [categories] = useCategories();
   return (
     <>
-      <PageHeader title={deviceWidth < 728 ? "Dev Mobile" : "Dev Web"} />
-      <div className="list-container">
+      <div id="page-list-category" className="container">
+        <PageHeader title={deviceWidth < 728 ? "Dev Mobile" : "Dev Web"} />
+        {/* <div > */}
+
         <div className="page-subtitle">
           <p>Categories</p>
         </div>
