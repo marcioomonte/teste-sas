@@ -1,0 +1,29 @@
+.rate-balloon {
+  width: 86px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #343c582e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px 0 11px;
+}
+
+/* 
+.rate-balloon .star {
+  width: 20px;
+  height: 20px;
+} */
+
+.rate-balloon .star-filled path {
+  fill: #343c58;
+}
+.rate-balloon .star-empty path {
+  fill: #343c584b;
+}
+
+.rate-balloon p {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-primary);
+}
