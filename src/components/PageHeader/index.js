@@ -1,11 +1,10 @@
-import React from "react";
-import "./styles.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import './styles.css';
 
 function PageHeader({ children, title }) {
   return (
-    <header className="page-header">
-      <div className="header-content">
+    <header className='page-header'>
+      <div className='header-content'>
         <strong>{title}</strong>
         {children}
       </div>
