@@ -1,11 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import Routes from "./routes";
-
-import "./assets/styles/global.css";
+import Routes from './routes';
+import { TestProvider } from './contexts/testContext';
+import './assets/styles/global.css';
 
 function App() {
-  return <Routes />;
+  return (
+    <>
+      <TestProvider>
+        <Routes />
+      </TestProvider>
+    </>
+  );
 }
 
 export default App;
