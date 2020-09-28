@@ -5,12 +5,12 @@
 
 #page-list-category .page-subtitle {
   position: relative;
-  margin: 10rem 0 0 3.2rem;
+  margin: 8rem 0 0 3.2rem;
 }
 #page-list-category .page-subtitle p {
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   text-align: center;
@@ -22,18 +22,17 @@
 }
 
 @media (min-width: 700px) {
+  #page-list-category .list-category {
+    margin-top: 12rem;
+  }
   .list-container {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .page-subtitle {
-    position: absolute;
-    width: 102px;
-    height: 27px;
-    left: 24px;
-    top: 80px;
+  #page-list-category .page-subtitle {
+    top: 8rem;
     margin-bottom: 40px;
   }
   .page-subtitle p {

@@ -1,0 +1,32 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.6rem;
+}
+
+.button-container a {
+  width: 27rem;
+  height: 4.8rem;
+  border-radius: 1.2rem;
+  font-size: 2rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  color: #ffffff;
+
+  background-color: #4d8af0;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.button-container a:hover {
+  background-color: #3d6dc0;
+}
+
+.button-container a svg {
+  margin-left: 1.6rem;
+}
