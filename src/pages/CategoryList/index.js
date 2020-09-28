@@ -49,7 +49,7 @@ function CategoryList() {
                     category={category}
                   />
                 ))
-              : `Sem questoes cadastradas`}
+              : `Loading....`}
           </div>
         </main>
       </div>
