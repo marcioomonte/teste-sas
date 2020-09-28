@@ -1,34 +1,30 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import "./styles.css";
+import './styles.css';
 
-import tickImg from "../../assets/images/tick.svg";
-import crossImg from "../../assets/images/cross.svg";
-function Modal({ type, visible }) {
-  const [_visible, setVisible] = useState(visible);
+import tickImg from '../../assets/images/tick.svg';
+import crossImg from '../../assets/images/cross.svg';
+
+function Modal({ children, visible, success }) {
+  // const [_visible, setVisible] = useState(visible);
 
   const modalStyle = {
-    display: _visible ? "block" : "none",
-    position: "fixed",
-    zIndex: 1,
-    left: 0,
-    top: 0,
-    width: "100%",
-    height: "100%",
-    overflow: "auto",
-    backgroundColor: "rgb(0,0,0)",
-    backgroundColor: "rgba(0,0,0,0.4)",
+    display: visible ? 'block' : 'none',
+    position: 'fixed',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  };
+
+  const modalContent = {
+    border: success ? '3px solid #32cb82' : '3px solid #FF4F4F',
   };
 
   return (
-    <div style={modalStyle} class="modal">
-      <div class="modal-content">
-        {/* <span onClick={() => setVisible(false)} class="close">
-          &times;
-        </span> */}
-        <img src={tickImg} />
-        <p>Voce acertou!</p>
+    <div style={modalStyle} className='modal'>
+      <div className='modal-content' style={modalContent}>
+        <img src={success ? tickImg : crossImg} />
+        {success ? <p>Você acertou!</p> : <p> Você errou! </p>}
       </div>
+      {children}
     </div>
   );
 }
