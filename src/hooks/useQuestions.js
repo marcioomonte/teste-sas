@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../services/api';
 
@@ -11,47 +12,46 @@ const defaultSerializer = (questions) => {
     type,
   } = questions;
 
+  const newAnswers = [
+    ...incorrect_answers.map((i) => atob(i)),
+    atob(correct_answer),
+  ];
+
   return {
     category: atob(category),
     correct_answer: atob(correct_answer),
     difficulty: atob(difficulty),
-    answers: [
-      ...incorrect_answers.map((i) => atob(i)),
-      atob(correct_answer),
-    ].sort(function () {
-      return 0.5 - Math.random();
-    }),
+    answers: newAnswers.sort(() => Math.random() - 0.5), //randomiza a resposta
     question: atob(question),
     type: atob(type),
   };
 };
 
-function useQuestions(category, serializer = defaultSerializer) {
+function useQuestions(category, difficulty, serializer = defaultSerializer) {
   const [error, setError] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const getQuestions = useCallback(
-    (category) => {
-      setLoading(true);
-      api
-        .get(
-          `api.php?amount=10&type=multiple&category=${category}&encode=base64`
-        ) // a url ja esta na base
-        .then((response) => response.data.results)
-        .then((_questions) => _questions.map(serializer))
-        .then(setQuestions)
-        .catch(() => setError(true))
-        .finally(() => setLoading(false));
-    },
-    [serializer]
-  );
+  const getQuestions = (category, difficulty) => {
+    setLoading(true);
+    api
+      .get(
+        `api.php?amount=1&type=multiple&category=${category}&encode=base64&difficulty=${difficulty}`
+      )
+      .then((response) => response.data.results)
+      .then((_questions) => _questions.map(serializer))
+      .then(setQuestions)
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
-    getQuestions(category);
-  }, [getQuestions, category]);
+    if (category && difficulty) {
+      getQuestions(category, difficulty);
+    }
+  }, [category, difficulty]);
 
-  return [questions, loading, error, { getQuestions }];
+  return [questions, loading, error, getQuestions];
 }
 
 export default useQuestions;
