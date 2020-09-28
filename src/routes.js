@@ -15,7 +15,7 @@ function Routes() {
           <Route path='/questions'>
             <QuestionContent />
           </Route>
-          <Route path='/'>
+          <Route path='/teste-sas'>
             <CategoryList />
           </Route>
         </Switch>
