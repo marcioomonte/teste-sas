@@ -20,12 +20,13 @@ import RateBalloon from '../../components/RateBalloon';
 function QuestionContent() {
   const { state } = useLocation();
   const history = useHistory();
-  const [questions, , , getQuestions] = useQuestions();
+  const [questions, loadingQuestion, , getQuestions] = useQuestions();
 
   const [
     modalAnswerSelectedVisibility,
     setModalAnswerrSelectedVisibility,
   ] = useState(false);
+
   const [modalAnswerVisibility, setModalAnswerVisibility] = useState(false);
   const [referenceTest, setReferenceTest] = useState();
   const [question, setQuestion] = useState(questions[0]);
@@ -34,7 +35,6 @@ function QuestionContent() {
   const { tests, testDispatcher } = useTestContext();
 
   useEffect(() => {
-    setModalAnswerVisibility(false);
     const matchTest = tests?.tests?.find(
       (test) => test.category === state.name
     );
@@ -46,6 +46,7 @@ function QuestionContent() {
     setReferenceTest(
       tests?.tests?.find((test) => test.category === state.name)
     );
+    setModalAnswerVisibility(false);
   }, [tests]);
 
   useEffect(() => {
@@ -85,20 +86,26 @@ function QuestionContent() {
           <span>Question {referenceTest?.answered_questions + 1} / 10</span>
           <RateBalloon difficulty={questions[0]?.difficulty} />
         </div>
-        <div className='question-container'>
-          <p>{questions[0]?.question} </p>
-        </div>
-        <div className='answer-container'>
-          {questions[0]?.answers.map((answer) => (
-            <div
-              key={answer}
-              onClick={() => onAnswerSelected(questions[0], answer)}
-              className='answer-box'
-            >
-              <p>{answer}</p>
+        {!loadingQuestion ? (
+          <>
+            <div className='question-container'>
+              <p>{questions[0]?.question} </p>
             </div>
-          ))}
-        </div>
+            <div className='answer-container'>
+              {questions[0]?.answers.map((answer) => (
+                <div
+                  key={answer}
+                  onClick={() => onAnswerSelected(questions[0], answer)}
+                  className='answer-box'
+                >
+                  <p>{answer}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          'Loading...'
+        )}
       </div>
       <Drawer visible={modalAnswerSelectedVisibility}>
         <Button onClick={() => handleAnswer()} icon='arrow'>
