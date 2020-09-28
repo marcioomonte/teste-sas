@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from "react";
-import { api } from "../services/api";
+import { useState, useEffect, useCallback } from 'react';
+import { api } from '../services/api';
 
 function useCategories() {
   const [error, setError] = useState(false);
