@@ -33,19 +33,19 @@
   text-align: center;
 }
 
-.buttons-container a:hover {
-  opacity: 50%;
-}
-
 @media (min-width: 1100px) {
+  .buttons-container a:hover {
+    opacity: 50%;
+  }
+
   #page-landing-content {
     max-width: 1100px;
     display: grid;
     grid-template-rows: 350px 1fr;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-areas:
-      "logo hero hero"
-      "buttons buttons total";
+      'logo hero hero'
+      'buttons buttons total';
   }
 
   .buttons-container {
