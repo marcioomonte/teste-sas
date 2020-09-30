@@ -46,7 +46,7 @@ function QuestionContent() {
     };
 
     console.log(matchTest);
-    setQuestion(getQuestions(state.id, getDifficulty()));
+    setQuestion(getQuestions(state.id, 'medium'));
     setReferenceTest(
       tests?.tests?.find((test) => test.category === state.name)
     );
