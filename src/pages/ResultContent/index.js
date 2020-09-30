@@ -65,7 +65,7 @@ function ResultContent() {
           <div>
             <strong>Medium</strong>{' '}
             <p>Correct: {totalByDifficulty('medium').correct}</p>
-            <p>Medium: {totalByDifficulty('medium').incorrect}</p>
+            <p>Incorrect: {totalByDifficulty('medium').incorrect}</p>
           </div>
           <div>
             <strong>Hard</strong>{' '}
