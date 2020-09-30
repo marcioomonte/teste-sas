@@ -30,6 +30,8 @@ function QuestionContent() {
 
   const buttonRefs = useRef([]);
 
+  const DIFFICULTS = ['easy', 'medium', 'hard'];
+
   useEffect(() => {
     const matchTest = tests?.tests?.find(
       (test) => test.category === state.name
@@ -39,23 +41,56 @@ function QuestionContent() {
       history.push('/results', state.name);
     }
 
+    const [lastQuestion] = matchTest.answers.slice(-1);
+
     const getDifficulty = () => {
-      if (matchTest.answers.length === 1) {
+      if (matchTest.answers.length < 2) {
         return 'medium';
       }
+      const lastTwoAnswers = matchTest.answers.slice(-2);
+      if (matchTest.answers.length >= 2) {
+        if (lastTwoAnswers[0].correct && lastTwoAnswers[1].correct) {
+          switch (lastQuestion.difficulty) {
+            case 'medium':
+              return 'hard';
+            case 'hard':
+              return 'hard';
+            case 'easy':
+              return 'medium';
+            default:
+              break;
+          }
+        }
+        if (!lastTwoAnswers[0].correct && !lastTwoAnswers[1].correct) {
+          switch (lastQuestion.difficulty) {
+            case 'medium':
+              return 'easy';
+            case 'hard':
+              return 'medium';
+            case 'easy':
+              return 'easy';
+            default:
+              break;
+          }
+        }
+      }
+      return lastQuestion.difficulty;
     };
 
     console.log(matchTest);
-    setQuestion(getQuestions(state.id, 'medium'));
+
+    setQuestion(getQuestions(state.id, getDifficulty()));
+
     setReferenceTest(
       tests?.tests?.find((test) => test.category === state.name)
     );
+
     setModalAnswerVisibility(false);
   }, [tests]);
 
   useEffect(() => {
     if (referenceTest?.answers.length === 0) {
-      setQuestion(getQuestions(state.id, 'medium'));
+      setQuestion(getQuestions(state.id, DIFFICULTS[1]));
     }
   }, [referenceTest]);
 

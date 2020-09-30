@@ -63,4 +63,7 @@
   #question-content-container .subtitle {
     margin-top: 16rem;
   }
+  .answer-container .answer-box:active {
+    border: 2px solid #f04dd5;
+  }
 }
