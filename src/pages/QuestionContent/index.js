@@ -10,6 +10,7 @@ import Button from '../../components/Button';
 import { useTestContext, addAnswer } from '../../contexts/testContext';
 
 import RateBalloon from '../../components/RateBalloon';
+import moment from 'moment';
 
 function QuestionContent() {
   const { state } = useLocation();
@@ -115,6 +116,7 @@ function QuestionContent() {
     testDispatcher(
       addAnswer({
         ...questions[0],
+        date_answered: moment().format('LLLL'),
         selected_answer: selectedAnswer,
         correct: questions[0].correct_answer === selectedAnswer,
       })

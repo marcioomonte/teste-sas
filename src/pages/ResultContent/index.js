@@ -5,6 +5,8 @@ import PageHeader from '../../components/PageHeader';
 import mascote from '../../assets/images/mascote.png';
 import './styles.css';
 import { useTestContext } from '../../contexts/testContext';
+import { jsPDF } from 'jspdf';
+import { savePdf } from '../../utils/savePdf';
 
 function ResultContent() {
   const history = useHistory();
@@ -34,6 +36,8 @@ function ResultContent() {
 
     return { correct, incorrect };
   };
+
+  const doc = new jsPDF();
 
   return (
     <>
@@ -72,6 +76,15 @@ function ResultContent() {
             <p>Correct: {totalByDifficulty('hard').correct}</p>
             <p>Incorrect: {totalByDifficulty('hard').incorrect}</p>
           </div>
+        </div>
+        <div className=''>
+          <Button
+            onClick={() => {
+              savePdf(referenceTest);
+            }}
+          >
+            Save
+          </Button>
         </div>
         <div className='button-back'>
           <Button onClick={() => history.push('/')}>Back to start</Button>
