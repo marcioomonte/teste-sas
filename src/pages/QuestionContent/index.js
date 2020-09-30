@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PageHeader from '../../components/PageHeader';
-import './styles.css';
 import { useHistory, useLocation } from 'react-router-dom';
 import useQuestions from '../../hooks/useQuestions';
-
+import './styles.css';
 import Modal from '../../components/Modal';
 import Drawer from '../../components/Drawer';
 import Button from '../../components/Button';
 
-import {
-  startTest,
-  initTest,
-  useTestContext,
-  addAnswer,
-} from '../../contexts/testContext';
+import { useTestContext, addAnswer } from '../../contexts/testContext';
 
 import RateBalloon from '../../components/RateBalloon';
 
@@ -44,9 +38,15 @@ function QuestionContent() {
     if (matchTest.answers.length > 9) {
       history.push('/results', state.name);
     }
-    console.log(tests);
-    console.log(referenceTest);
-    setQuestion(getQuestions(state.id, 'medium'));
+
+    const getDifficulty = () => {
+      if (matchTest.answers.length === 1) {
+        return 'medium';
+      }
+    };
+
+    console.log(matchTest);
+    setQuestion(getQuestions(state.id, getDifficulty()));
     setReferenceTest(
       tests?.tests?.find((test) => test.category === state.name)
     );
@@ -78,7 +78,11 @@ function QuestionContent() {
 
   const handleNext = () => {
     testDispatcher(
-      addAnswer({ ...questions[0], selected_answer: selectedAnswer })
+      addAnswer({
+        ...questions[0],
+        selected_answer: selectedAnswer,
+        correct: questions[0].correct_answer === selectedAnswer,
+      })
     );
   };
 

@@ -14,23 +14,13 @@ export const START_TEST = 'START_TEST';
 
 export const ADD_ANSWER = 'ADD_ANSWER';
 
-export const UPDATE_QUESTION = 'UPDATE_QUESTION';
-
 export const INIT_TEST = 'INIT_TEST';
 
 export const CLEAR_TEST = 'CLEAR_TEST';
 
-export const REMOVE_QUESTION = 'REMOVE_QUESTION';
-
 export const startTest = (tests) => ({ type: START_TEST, tests });
 
 export const addAnswer = (answer) => ({ type: ADD_ANSWER, answer });
-
-export const updateQuestion = (item, indice) => ({
-  type: UPDATE_QUESTION,
-  item,
-  indice,
-});
 
 export const initTest = (tests) => ({
   type: INIT_TEST,
@@ -38,8 +28,6 @@ export const initTest = (tests) => ({
 });
 
 export const clearTest = () => ({ type: CLEAR_TEST });
-
-export const removeItem = (index) => ({ type: REMOVE_QUESTION, index });
 
 export const testReducer = (state, action) => {
   switch (action.type) {
@@ -59,17 +47,6 @@ export const testReducer = (state, action) => {
 
       return { tests: [...tests, action.tests] };
 
-    // case UPDATE_QUESTION:
-    //   return {
-    //     ...state,
-    //     tests: state.itens.map((question, index) => {
-    //       if (index === action.index) {
-    //         return action.question;
-    //       }
-    //       return tests;
-    //     }),
-    //   };
-
     case INIT_TEST:
       return {
         tests: [],
@@ -87,32 +64,8 @@ export const testReducer = (state, action) => {
         }),
       };
 
-    // const _matchTest = state.tests?.find(
-    //   (test, index) => test.category === action.answer.category
-    // );
-
-    // const testWithNewAnswer = {
-    //   ..._matchTest,
-    //   answers: [..._matchTest.answers, action.answer],
-    // };
-    // console.log(testWithNewAnswer);
-    // return { tests: [...state) ] };
-
     case CLEAR_TEST:
       return INITIAL_STATE;
-
-    case REMOVE_QUESTION: {
-      const itens = state.itens.filter(
-        (item, indice) => indice !== action.indice
-      );
-      if (itens.length === 0) {
-        return INITIAL_STATE;
-      }
-      return {
-        ...state,
-        itens,
-      };
-    }
 
     default:
       return state;

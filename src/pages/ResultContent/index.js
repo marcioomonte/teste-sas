@@ -1,13 +1,40 @@
-import React from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import Button from '../../components/Button';
 import PageHeader from '../../components/PageHeader';
 import mascote from '../../assets/images/mascote.png';
 import './styles.css';
+import { useTestContext } from '../../contexts/testContext';
 
 function ResultContent() {
   const history = useHistory();
+
   const { state } = useLocation();
+  const { tests } = useTestContext();
+  const [referenceTest, setReferenceTest] = useState();
+  useEffect(() => {
+    setReferenceTest(tests?.tests?.find((test) => test.category === state));
+  }, []);
+
+  const totalCorrect = () =>
+    referenceTest &&
+    referenceTest.answers.filter((question) => question.correct).length;
+
+  const totalByDifficulty = (difficulty) => {
+    const correct =
+      referenceTest &&
+      referenceTest.answers.filter(
+        (question) => question.correct && question.difficulty === difficulty
+      ).length;
+    const incorrect =
+      referenceTest &&
+      referenceTest.answers.filter(
+        (question) => !question.correct && question.difficulty === difficulty
+      ).length;
+
+    return { correct, incorrect };
+  };
+
   return (
     <>
       <PageHeader title={state} />
@@ -19,28 +46,31 @@ function ResultContent() {
         </div>
         <div className='total-container'>
           <div className='total'>
-            <strong>7</strong>
+            <strong>{totalCorrect()}</strong>
             <p>Corrects</p>
           </div>
 
           <div className='total'>
-            <strong>7</strong>
+            <strong>{10 - totalCorrect()}</strong>
             <p>Incorrects</p>
           </div>
         </div>
 
         <div className='score-container'>
           <div>
-            <strong>Easy</strong> <p>Correct: 1</p>
-            <p>Incorrect: 2</p>
+            <strong>Easy</strong>{' '}
+            <p>Correct: {totalByDifficulty('easy').correct}</p>
+            <p>Incorrect: {totalByDifficulty('easy').incorrect}</p>
           </div>
           <div>
-            <strong>Medium</strong> <p>Correct: 1</p>
-            <p>Medium: 2</p>
+            <strong>Medium</strong>{' '}
+            <p>Correct: {totalByDifficulty('medium').correct}</p>
+            <p>Medium: {totalByDifficulty('medium').incorrect}</p>
           </div>
           <div>
-            <strong>Hard</strong> <p>Correct: 1</p>
-            <p>Incorrect: 2</p>
+            <strong>Hard</strong>{' '}
+            <p>Correct: {totalByDifficulty('hard').correct}</p>
+            <p>Incorrect: {totalByDifficulty('hard').incorrect}</p>
           </div>
         </div>
         <div className='button-back'>
