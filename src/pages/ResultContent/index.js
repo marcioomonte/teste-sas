@@ -77,13 +77,13 @@ function ResultContent() {
             <p>Incorrect: {totalByDifficulty('hard').incorrect}</p>
           </div>
         </div>
-        <div className=''>
+        <div className='button-save'>
           <Button
             onClick={() => {
               savePdf(referenceTest);
             }}
           >
-            Save
+            Save PDF
           </Button>
         </div>
         <div className='button-back'>

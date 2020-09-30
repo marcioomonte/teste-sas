@@ -80,7 +80,7 @@
 }
 
 .button-back {
-  position: absolute;
+  position: relative;
   bottom: 1.6rem;
 }
 
@@ -90,5 +90,15 @@
   }
   #resultContaier {
     margin-top: 20px;
+  }
+  .button-save {
+    position: fixed;
+    top: 15px;
+    z-index: 1;
+  }
+
+  .button-back {
+    position: relative;
+    bottom: 1.6rem;
   }
 }
