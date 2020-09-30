@@ -1,5 +1,9 @@
 Foi utilizado creat-react-app para inicio já com um boilerplate
 
+Início: 
+
+### `npm install`
+
 ## Scripts disponíveis
 
 Do diretório deve-se rodar:
