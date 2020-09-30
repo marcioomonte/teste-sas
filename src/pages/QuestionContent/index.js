@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PageHeader from '../../components/PageHeader';
 import './styles.css';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -34,14 +34,18 @@ function QuestionContent() {
   const [success, setSuccess] = useState(false);
   const { tests, testDispatcher } = useTestContext();
 
+  const buttonRefs = useRef([]);
+
   useEffect(() => {
     const matchTest = tests?.tests?.find(
       (test) => test.category === state.name
     );
 
     if (matchTest.answers.length > 9) {
-      history.push('/results');
+      history.push('/results', state.name);
     }
+    console.log(tests);
+    console.log(referenceTest);
     setQuestion(getQuestions(state.id, 'medium'));
     setReferenceTest(
       tests?.tests?.find((test) => test.category === state.name)
@@ -92,11 +96,12 @@ function QuestionContent() {
               <p>{questions[0]?.question} </p>
             </div>
             <div className='answer-container'>
-              {questions[0]?.answers.map((answer) => (
+              {questions[0]?.answers.map((answer, i) => (
                 <div
                   key={answer}
                   onClick={() => onAnswerSelected(questions[0], answer)}
                   className='answer-box'
+                  ref={(el) => (buttonRefs.current[i] = el)}
                 >
                   <p>{answer}</p>
                 </div>
